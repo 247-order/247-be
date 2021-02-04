@@ -1,0 +1,103 @@
+version: '3.7'
+
+services:
+  # main:
+  #   container_name: main
+  #   restart: always
+  #   build:
+  #     context: .
+  #     target: development
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #     # - ./node_modules:/usr/src/app/node_modules
+  #   command: npm run start:debug
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - webnet
+  #   depends_on:
+  #     - redis
+  #     - mariadb
+  #   links:
+  #     - mariadb:mariadb
+
+  ws-rest-api:
+    build:
+      context: .
+      dockerfile: apps/ws-rest-api/Dockerfile
+      target: development
+      args:
+        NODE_ENV: development
+    # image: "ws-rest-api:latest"
+    restart: always
+    networks:
+      - webnet
+    volumes:
+      - .:/nest
+      - /nest/node_modules
+    depends_on:
+      - mariadb
+      - redis
+    links:
+      - mariadb
+    ports:
+      - ${PORT_WS_REST_API}:3000
+      - ${PORT_DEBUG_WS_REST_API}:9229
+    environment:
+      - MARIADB_HOST=mariadb
+
+  ws-front-end:
+    build:
+      context: .
+      dockerfile: apps/ws-front-end/Dockerfile
+      target: development
+      args:
+        NODE_ENV: development
+    # image: "ws-front-end:latest"
+    restart: always
+    networks:
+      - webnet
+    volumes:
+      - .:/nest
+      - /nest/node_modules
+    depends_on:
+      - mariadb
+      - redis
+    ports:
+      - ${PORT_WS_FRONT_END}:3000
+      - ${PORT_DEBUG_WS_FRONT_END}:9229
+
+  redis:
+    container_name: redis
+    restart: always
+    image: redis:5
+    networks:
+      - webnet
+
+  mariadb:
+    image: mariadb
+    restart: always
+    networks:
+      - webnet
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: ${DB_DATABASE_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  webnet:
+
+volumes:
+  dbdata:

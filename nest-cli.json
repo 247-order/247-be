@@ -1,0 +1,48 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/ws-front-end/src",
+  "monorepo": true,
+  "root": "apps/ws-front-end/",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/ws-front-end//tsconfig.app.json"
+  },
+  "projects": {
+    "sam01": {
+      "type": "application",
+      "root": "apps/sam01",
+      "entryFile": "main",
+      "sourceRoot": "apps/sam01/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sam01/tsconfig.app.json"
+      }
+    },
+    "ws-rest-api": {
+      "type": "application",
+      "root": "apps/ws-rest-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/ws-rest-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ws-rest-api/tsconfig.app.json"
+      }
+    },
+    "ws-front-end": {
+      "type": "application",
+      "root": "apps/ws-front-end",
+      "entryFile": "main",
+      "sourceRoot": "apps/ws-front-end/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ws-front-end/tsconfig.app.json"
+      }
+    },
+    "databases": {
+      "type": "library",
+      "root": "libs/databases",
+      "entryFile": "index",
+      "sourceRoot": "libs/databases/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/databases/tsconfig.lib.json"
+      }
+    }
+  }
+}
