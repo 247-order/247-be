@@ -16,6 +16,13 @@ import entities from '../entities';
       entities: [...entities],
       // debug: true,
       synchronize: true,
+      // cache: {
+      //   type: 'redis',
+      //   options: {
+      //     host: process.env.REDIS_HOST,
+      //     port: 6379,
+      //   },
+      // },
     }),
   ],
 })

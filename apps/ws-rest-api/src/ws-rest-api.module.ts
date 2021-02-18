@@ -6,7 +6,11 @@ import { MysqlModule } from '@samec/databases/mysql/mysql.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [MysqlModule, UsersModule, AuthModule],
+  imports: [
+    MysqlModule, 
+    // UsersModule, 
+    AuthModule
+  ],
   controllers: [WsRestApiController],
   providers: [WsRestApiService],
 })

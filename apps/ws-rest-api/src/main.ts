@@ -9,10 +9,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const options = new DocumentBuilder()
-    .setTitle('SamEC API docs')
-    .setDescription('SamEC API docs')
+    .setTitle('247-order API docs')
+    .setDescription('247-order API docs')
     .setVersion('1.0')
     .addTag('samec')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
