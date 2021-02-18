@@ -36,6 +36,10 @@ export class Profile {
   dob: Date;
 
   @ApiProperty()
+  @Column({ name: 'phone', type: 'varchar', length: '20'})
+  phone: string;
+
+  @ApiProperty()
   @Column({ name: 'avatar', type: 'varchar', length: '128' })
   avatar: string;
 

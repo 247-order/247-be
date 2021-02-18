@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsOptional, IsString, Length } from 'class-validator';
+import { IsDateString, IsOptional, IsPhoneNumber, IsString, Length } from 'class-validator';
 
 export class ProfileDto {
   @ApiProperty()
@@ -18,4 +18,8 @@ export class ProfileDto {
   @IsDateString()
   @IsOptional()
   dob: Date;
+
+  @ApiProperty()
+  @IsPhoneNumber('vi')
+  phone: Date;
 }

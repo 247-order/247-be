@@ -4,14 +4,16 @@ import { WsRestApiService } from './ws-rest-api.service';
 import { UsersModule } from './users/users.module';
 import { MysqlModule } from '@samec/databases/mysql/mysql.module';
 import { AuthModule } from './auth/auth.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    MysqlModule, 
+    MysqlModule,
     // UsersModule, 
-    AuthModule
+    AuthModule,
+    ProductModule
   ],
   controllers: [WsRestApiController],
   providers: [WsRestApiService],
 })
-export class WsRestApiModule {}
+export class WsRestApiModule { }

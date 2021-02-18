@@ -12,7 +12,6 @@ async function bootstrap() {
     .setTitle('247-order API docs')
     .setDescription('247-order API docs')
     .setVersion('1.0')
-    .addTag('samec')
     .addBearerAuth()
     .build();
 
