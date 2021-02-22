@@ -5,13 +5,15 @@ import { UsersModule } from './users/users.module';
 import { MysqlModule } from '@samec/databases/mysql/mysql.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
     MysqlModule,
     // UsersModule, 
     AuthModule,
-    ProductModule
+    ProductModule,
+    OrderModule
   ],
   controllers: [WsRestApiController],
   providers: [WsRestApiService],

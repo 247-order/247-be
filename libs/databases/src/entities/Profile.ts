@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Address } from './Address';
 import { User } from './User';
 
 @Entity()
@@ -42,6 +43,9 @@ export class Profile {
   @ApiProperty()
   @Column({ name: 'avatar', type: 'varchar', length: '128' })
   avatar: string;
+
+  @OneToOne(() => Address, (address) => address.profile)
+  address: Address;
 
   @CreateDateColumn({ select: false })
   createdDate: Date;

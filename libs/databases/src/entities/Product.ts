@@ -11,6 +11,12 @@ import {
 } from 'typeorm';
 import { Category } from './Category';
 
+export enum ProductSource {
+  sTAOBAO = 'TAOBAO',
+  s1688 = '1688',
+  sPINDUODUO = 'PINDUODUO'
+}
+
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
@@ -27,11 +33,23 @@ export class Product {
   @Column({ name: 'quantity', type: 'float', width: 20 })
   quantity: number;
 
+  @Column({ name: 'original_source', type: 'varchar', length: '128'})
+  originalSource: ProductSource;
+
+  @Column({ name: 'original_url', type: 'varchar', length: '128'})
+  originalUrl: string;
+
+  @Column({ name: 'note', type: 'varchar', length: '1000'})
+  note: string;
+
   @Column({ name: 'image', type: 'varchar', length: '128', nullable: true })
   productImage: string;
 
   @Column({ name: 'price', type: 'float', width: 20 })
   productPrice: number;
+
+  @Column({ name: 'price_vnd', type: 'float', width: 20 })
+  productPriceVnd: number;
 
   @Column({ name: 'special_price', type: 'float', width: 20, nullable: true })
   productSpecialPrice: number;

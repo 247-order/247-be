@@ -1,3 +1,4 @@
+import { Address } from './Address';
 import { Attribute } from './Attribute';
 import { Category } from './Category';
 import { Order } from './Order';
@@ -20,4 +21,5 @@ export default [
   Setting,
   Store,
   Voucher,
+  Address
 ];
