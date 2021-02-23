@@ -1,8 +1,8 @@
 {
-    "name": "sam01",
+    "name": "247-order",
     "version": "0.0.1",
-    "description": "",
-    "author": "",
+    "description": "Logistic platform",
+    "author": "chungpt",
     "private": true,
     "license": "UNLICENSED",
     "scripts": {
@@ -39,6 +39,7 @@
         "class-validator": "^0.12.2",
         "fastify-swagger": "^3.5.0",
         "mysql": "^2.18.1",
+        "nestjs-typeorm-paginate": "^2.3.2",
         "passport": "^0.4.1",
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",

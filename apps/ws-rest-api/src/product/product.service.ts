@@ -1,19 +1,35 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MYSQL_MAIN_CONNECTION } from '@samec/databases/constants/db.constants';
+import { Product } from '@samec/databases/entities/Product';
+import { ProductRepository } from '@samec/databases/repositories/ProductRepository';
+import { IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  @InjectRepository(Product, MYSQL_MAIN_CONNECTION)
+  private readonly productRepository: ProductRepository;
+
+  async create(createProductDto: CreateProductDto, user): Promise<Product> {
+    let createdProd;
+    try {
+      createdProd = await this.productRepository.save({ ...createProductDto, user: user.userId });
+    } catch (e: any) {
+      console.log(e);
+      throw new HttpException(e.message, HttpStatus.BAD_REQUEST)
+    }
+
+    return createdProd;
   }
 
-  findAll() {
-    return `This action returns all product`;
+  async findAll(user, paginationParams: IPaginationOptions) {
+    return this.productRepository.findProductByUser(user.userId, paginationParams)
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} product`;
+    return this.productRepository.findOne({ id });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
@@ -21,6 +37,6 @@ export class ProductService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    return this.productRepository.delete(id)
   }
 }

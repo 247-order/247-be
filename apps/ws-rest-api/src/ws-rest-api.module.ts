@@ -13,7 +13,7 @@ import { OrderModule } from './order/order.module';
     // UsersModule, 
     AuthModule,
     ProductModule,
-    OrderModule
+    // OrderModule
   ],
   controllers: [WsRestApiController],
   providers: [WsRestApiService],
