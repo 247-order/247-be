@@ -68,12 +68,9 @@ export class AuthService {
       if (await this.usersRepository.findOne({ email }))
         throw new BadRequestException(ERROR__USER__USER_EMAIL_ALREADY_EXIST);
 
-      const userData = this.usersRepository.create(createUserDto);
-
       const savedUser = await this.usersRepository.save(this.usersRepository.create(createUserDto))
-      // const profileData = this.profileRepository.create({ fullName, user: savedUser });
-      const savedProfile = await this.profileRepository.save({ fullName, user: savedUser, phone });
-      const savedAddress = await this.addressRepository.save({ description: address, default: true })
+      const savedProfile = await this.profileRepository.save(this.profileRepository.create({ fullName, user: savedUser, phone }));
+      const savedAddress = await this.addressRepository.save(this.addressRepository.create({ description: address, default: true, profile: savedProfile }))
 
       return savedUser;
     } catch (e: any) {
