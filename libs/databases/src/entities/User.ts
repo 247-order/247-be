@@ -8,10 +8,13 @@ import {
   Entity,
   Index,
   JoinColumn,
+  ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Product } from './Product';
 import { Profile } from './Profile';
 import { Role, Roles } from './Role';
 
@@ -52,6 +55,9 @@ export class User {
 
   @OneToOne(() => Profile, (profile) => profile.user)
   profile: Promise<Profile>;
+
+  @OneToMany(() => Product, (product) => product.user)
+  products: Product[];
 
   @CreateDateColumn({ select: false })
   createdDate: Date;
