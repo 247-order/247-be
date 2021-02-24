@@ -25,12 +25,8 @@ export class Profile {
   user: User;
 
   @ApiProperty()
-  @Column({ name: 'first_name', type: 'varchar', length: '20', nullable: true })
-  firstName: string;
-
-  @ApiProperty()
-  @Column({ name: 'last_name', type: 'varchar', length: '20', nullable: true })
-  lastName: string;
+  @Column({ name: 'full_name', type: 'varchar', length: '64', nullable: true })
+  fullName: string;
 
   @ApiProperty()
   @Column({ name: 'dob', type: 'datetime', nullable: true })
@@ -41,11 +37,11 @@ export class Profile {
   phone: string;
 
   @ApiProperty()
-  @Column({ name: 'avatar', type: 'varchar', length: '128' })
+  @Column({ name: 'avatar', type: 'varchar', length: '128', nullable: true })
   avatar: string;
 
   @OneToOne(() => Address, (address) => address.profile)
-  address: Address;
+  address: Promise<Address>;
 
   @CreateDateColumn({ select: false })
   createdDate: Date;

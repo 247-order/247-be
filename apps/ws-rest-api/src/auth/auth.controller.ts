@@ -34,8 +34,8 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('jwt')
+  @Get('profile')
   getProfile(@Request() req) {
-    return req.user;
+    return this.authService.getUserInfo(+req.user.userId)
   }
 }

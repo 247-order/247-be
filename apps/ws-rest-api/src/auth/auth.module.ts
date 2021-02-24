@@ -4,6 +4,7 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MYSQL_MAIN_CONNECTION } from '@samec/databases/constants/db.constants';
 import { JWT_SECRET } from '@samec/databases/constants/jwt.constants';
+import { AddressRepository } from '@samec/databases/repositories/AddressRepository';
 import { ProfileRepository } from '@samec/databases/repositories/ProfileRepository';
 import { UserRepository } from '@samec/databases/repositories/UserRepository';
 import { AuthController } from './auth.controller';
@@ -13,7 +14,11 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     TypeOrmModule.forFeature(
-      [UserRepository, ProfileRepository],
+      [
+        UserRepository, 
+        ProfileRepository,
+        AddressRepository
+      ],
       MYSQL_MAIN_CONNECTION,
     ),
     JwtModule.register({

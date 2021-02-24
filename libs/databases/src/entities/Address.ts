@@ -14,7 +14,7 @@ export class Address {
   @JoinColumn({ name: 'user_profile_id' })
   profile: Profile;
 
-  @Column({type: 'boolean'})
+  @Column({type: 'boolean', default: false})
   default: boolean
 
   @Column({type: 'varchar', length: '128'})

@@ -17,6 +17,8 @@ import {
 import { RegisterDto } from './dto/register.dto';
 import { Profile } from '@samec/databases/entities/Profile';
 import { ProfileRepository } from '@samec/databases/repositories/ProfileRepository';
+import { Address } from '@samec/databases/entities/Address';
+import { AddressRepository } from '@samec/databases/repositories/AddressRepository';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +28,10 @@ export class AuthService {
   @InjectRepository(Profile, MYSQL_MAIN_CONNECTION)
   private readonly profileRepository: ProfileRepository;
 
-  constructor(private jwtService: JwtService) {}
+  @InjectRepository(Address, MYSQL_MAIN_CONNECTION)
+  private readonly addressRepository: AddressRepository;
+
+  constructor(private jwtService: JwtService) { }
 
   async login(userName: string, password: string) {
     const user = await this.usersRepository.findOne(
@@ -56,7 +61,7 @@ export class AuthService {
   // getInfo() {}
 
   async register(createUserDto: RegisterDto): Promise<User> {
-    const { userName, email } = createUserDto;
+    const { userName, email, fullName, address, phone } = createUserDto;
     try {
       if (await this.usersRepository.findOne({ userName }))
         throw new BadRequestException(ERROR__USER__USER_NAME_ALREADY_EXIST);
@@ -64,15 +69,24 @@ export class AuthService {
         throw new BadRequestException(ERROR__USER__USER_EMAIL_ALREADY_EXIST);
 
       const userData = this.usersRepository.create(createUserDto);
-      const profileData = this.profileRepository.create(createUserDto.profile);
 
-      profileData.user = userData;
+      const savedUser = await this.usersRepository.save(this.usersRepository.create(createUserDto))
+      // const profileData = this.profileRepository.create({ fullName, user: savedUser });
+      const savedProfile = await this.profileRepository.save({ fullName, user: savedUser, phone });
+      const savedAddress = await this.addressRepository.save({ description: address, default: true })
 
-      const createdProfile = await this.profileRepository.save(profileData);
-      return createdProfile.user;
+      return savedUser;
     } catch (e: any) {
       throw new BadRequestException(e.message);
     }
+  }
+
+  async getUserInfo(userId: number) {
+    const user = await this.usersRepository.findOneOrFail(userId)
+    const profile = await user.profile
+    const address = await profile.address
+
+    return user
   }
 
   // resetPassword() {}

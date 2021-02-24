@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Profile } from '@samec/databases/entities/Profile';
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { IsEmail, IsOptional, IsPhoneNumber, IsString, Length } from 'class-validator';
 
 export class RegisterDto {
   @ApiProperty()
@@ -19,6 +19,16 @@ export class RegisterDto {
   password: string;
 
   @ApiProperty()
-  @IsOptional()
-  profile: Profile;
+  @IsString()
+  @Length(6, 60)
+  fullName: string;
+
+  @ApiProperty()
+  @IsPhoneNumber('vi')
+  phone: string;
+
+  @ApiProperty()
+  @IsString()
+  @Length(6, 128)
+  address: string;
 }
