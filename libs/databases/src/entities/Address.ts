@@ -1,4 +1,5 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Order } from "./Order";
 import { Profile } from "./Profile";
 
 @Entity()
@@ -28,4 +29,7 @@ export class Address {
 
   @CreateDateColumn({ select: false })
   deletedDate: Date;
+
+  @OneToMany(() => Order, order => order.address)
+  orders: Order[];
 }

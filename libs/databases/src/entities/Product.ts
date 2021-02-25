@@ -15,6 +15,7 @@ import {
   VersionColumn,
 } from 'typeorm';
 import { Category } from './Category';
+import { ProductOrdering } from './ProductOrdering';
 import { User } from './User';
 
 export enum ProductSource {
@@ -83,6 +84,9 @@ export class Product {
   })
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => ProductOrdering, productOrdering => productOrdering.product)
+  productOrdering: ProductOrdering[]
 
   @VersionColumn()
   version: number;

@@ -3,6 +3,7 @@ import { Attribute } from './Attribute';
 import { Category } from './Category';
 import { Order } from './Order';
 import { Product } from './Product';
+import { ProductOrdering } from './ProductOrdering';
 import { Profile } from './Profile';
 import { Role } from './Role';
 import { Setting } from './Setting';
@@ -21,5 +22,6 @@ export default [
   Setting,
   Store,
   Voucher,
-  Address
+  Address,
+  ProductOrdering
 ];

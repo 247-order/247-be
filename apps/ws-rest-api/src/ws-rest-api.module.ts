@@ -6,6 +6,7 @@ import { MysqlModule } from '@samec/databases/mysql/mysql.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
+import { DatabasesModule } from '@samec/databases';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { OrderModule } from './order/order.module';
     // UsersModule, 
     AuthModule,
     ProductModule,
-    // OrderModule
+    // OrderModule,
+    DatabasesModule.forRoot()
   ],
   controllers: [WsRestApiController],
   providers: [WsRestApiService],

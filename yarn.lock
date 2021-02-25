@@ -632,7 +632,7 @@
     multer "1.4.2"
     tslib "2.0.3"
 
-"@nestjs/platform-fastify@^7.6.3":
+"@nestjs/platform-fastify@^7.6.13":
   version "7.6.13"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-fastify/-/platform-fastify-7.6.13.tgz#15b62f600f12216ff39edeaa78c33b331a5c7f56"
   integrity sha512-wZ6ALoyovb8aRjMieROndi+bjzkuBilh3qBAV3sorjwpD8NSRrI/j4DsUdDcmexDfPSZH+mj9Bi7Z5cFtdjiRg==
@@ -655,10 +655,10 @@
     fs-extra "9.0.1"
     pluralize "8.0.0"
 
-"@nestjs/swagger@^4.7.8":
-  version "4.7.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.7.13.tgz#2640c8f5e30e98dda5072f12255d481f71faa6ce"
-  integrity sha512-KqFjkx6NOhRVRU4EBu42es/SjopqDwnAfgBCUPer+rKoMUCDMp/hF6dRoH7Z874whPho9pzGcAXBNMxo4/AGdg==
+"@nestjs/swagger@^4.7.15":
+  version "4.7.15"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.7.15.tgz#72baa08c246903006da0a4ef3803aa01749bd585"
+  integrity sha512-Nfj/s3Rp+pk4bzLWjDCkYF0rrp8g+KTfSjP5w6hxnIYV2nSuQuD0joJFVnSj91wyTeMULvCQ4/FEUzxP8Qmi1Q==
   dependencies:
     "@nestjs/mapped-types" "0.3.0"
     lodash "4.17.20"
@@ -1014,11 +1014,6 @@
   integrity sha512-Xt8TbEyZTnD5Xulw95GLMOkmjGICrOQyJ2jqgkSjAUR3mm7pAIzSR0NFBaMcwlzVvlpCjNwbATcWWwjNiZiFrQ==
   dependencies:
     "@types/superagent" "*"
-
-"@types/swagger-schema-official@^2.0.20":
-  version "2.0.21"
-  resolved "https://registry.yarnpkg.com/@types/swagger-schema-official/-/swagger-schema-official-2.0.21.tgz#56812a86dcd57ba60e5c51705ee96a2b2dc9b374"
-  integrity sha512-n9BbLOjR4Hre7B4TSGGMPohOgOg8tcp00uxqsIE00uuWQC0QuX57G1bqC1csLsk2DpTGtHkd0dEb3ipsCZ9dAA==
 
 "@types/tapable@*":
   version "1.0.6"
@@ -1472,6 +1467,11 @@ argparse@^1.0.7:
   integrity sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
   dependencies:
     sprintf-js "~1.0.2"
+
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
 arr-diff@^4.0.0:
   version "4.0.0"
@@ -2924,16 +2924,16 @@ fastify-static@^3.3.0:
     readable-stream "^3.4.0"
     send "^0.17.1"
 
-fastify-swagger@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-3.5.0.tgz#dcd494256c9c13e9759b85aa5b590c3333ce2707"
-  integrity sha512-zB65DJAvmzQ+4Wad270dk1xHh5rLjePCkohlt3wcUDTbG8DrFDSt0mD9zAfB/jNspx1EX5xtUIX2ZxGMYWDP4A==
+fastify-swagger@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/fastify-swagger/-/fastify-swagger-4.3.1.tgz#e0ff12a61c7c867544608bb40bb4e989fd418113"
+  integrity sha512-oB8BXr1Dl7bu3hBd+0v41N0x55FR++G21/pe/WCmK5mjHAjTqHqxkXDg4UWW1+cD7/d+Ve7Rv2rsSUQhgTzqyQ==
   dependencies:
-    "@types/swagger-schema-official" "^2.0.20"
     fastify-plugin "^3.0.0"
     fastify-static "^3.3.0"
-    js-yaml "^3.14.0"
+    js-yaml "^4.0.0"
     json-schema-resolver "^1.2.0"
+    openapi-types "^7.2.3"
 
 fastify-warning@^0.2.0:
   version "0.2.0"
@@ -4196,6 +4196,13 @@ js-yaml@^3.13.1, js-yaml@^3.14.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.0.0.tgz#f426bc0ff4b4051926cd588c71113183409a121f"
+  integrity sha512-pqon0s+4ScYUvX30wxQi3PogGFAlUyH0awepWvwkj4jD4v+ova3RiYw8bmA6x2rDrEaj8i/oWKoRxpVNW+Re8Q==
+  dependencies:
+    argparse "^2.0.1"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -5009,6 +5016,11 @@ onetime@^5.1.0:
   integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
+
+openapi-types@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/openapi-types/-/openapi-types-7.2.3.tgz#83829911a3410a022f0e0cf2b0b2e67232ccf96e"
+  integrity sha512-olbaNxz12R27+mTyJ/ZAFEfUruauHH27AkeQHDHRq5AF0LdNkK1SSV7EourXQDK+4aX7dv2HtyirAGK06WMAsA==
 
 optional@0.1.4:
   version "0.1.4"

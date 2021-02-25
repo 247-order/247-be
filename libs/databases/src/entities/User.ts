@@ -14,6 +14,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Order } from './Order';
 import { Product } from './Product';
 import { Profile } from './Profile';
 import { Role, Roles } from './Role';
@@ -58,6 +59,9 @@ export class User {
 
   @OneToMany(() => Product, (product) => product.user)
   products: Product[];
+
+  @OneToMany(() => Order, order => order.user)
+  orders: Order[]
 
   @CreateDateColumn({ select: false })
   createdDate: Date;

@@ -2,6 +2,7 @@ import {
   BadRequestException,
   HttpException,
   HttpStatus,
+  Inject,
   Injectable,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,6 +20,7 @@ import { Profile } from '@samec/databases/entities/Profile';
 import { ProfileRepository } from '@samec/databases/repositories/ProfileRepository';
 import { Address } from '@samec/databases/entities/Address';
 import { AddressRepository } from '@samec/databases/repositories/AddressRepository';
+import { DatabasesService } from '@samec/databases';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +33,10 @@ export class AuthService {
   @InjectRepository(Address, MYSQL_MAIN_CONNECTION)
   private readonly addressRepository: AddressRepository;
 
-  constructor(private jwtService: JwtService) { }
+  // @Inject()
+  // private databaseService: DatabasesService
+
+  constructor(private jwtService: JwtService, private databaseService: DatabasesService) { }
 
   async login(userName: string, password: string) {
     const user = await this.usersRepository.findOne(
@@ -58,8 +63,6 @@ export class AuthService {
     };
   }
 
-  // getInfo() {}
-
   async register(createUserDto: RegisterDto): Promise<User> {
     const { userName, email, fullName, address, phone } = createUserDto;
     try {
@@ -79,6 +82,8 @@ export class AuthService {
   }
 
   async getUserInfo(userId: number) {
+    console.log(this.databaseService.test());
+    
     const user = await this.usersRepository.findOneOrFail(userId)
     const profile = await user.profile
     const address = await profile.address
